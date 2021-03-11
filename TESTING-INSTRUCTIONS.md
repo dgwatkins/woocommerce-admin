@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+### Add abtest package and tracks events to validate #6536
+
+Before testing, it is a good idea to replace the ABTest experiment prop in client/task-list/tasks/payments/index.js with something easily identifiable. So something like
+
+```
+<ABTest
+	name ="validate_randomization_mechanism"
+	control={ card }
+	experiment={ <div>Hello Dolly</div> } <<< This line here.
+	onComplete={ this.handleABTestComplete }
+	key={ key }
+/>
+```
+
+1. Go to the payment task page (making sure your test store is eligible for WC Pay)
+2. This should assign you a group, then save to both localStorage (validate_randomization_mechanism key) and wp_options table (woocommerce_admin_abtests_validate_randomization_mechanism) Confirm these groups match and the payment task reflects this group correctly.
+3. Delete the group in localStorage, then refresh the page. Confirm the same group is stored in localStorage once again and the payment task reflects this.
+4. Delete the option in wp_options, then refresh the page. Confirm the payment task reflects the correct group. Note, we do not re-save the option in this case.
+5. Delete both the localStorage key and the option, then refresh the page. Do this a few times to confirm you are assigned a different group than the first time.
+6. Finally, check Tracks Live View for associated events and ensure they match what is expected. There should be only 1 assign event for each time the payment task is loaded when a group is not stored in either wp_options or localstorage. There should be as many serve events as you viewed the payment task page.
+
 ### Close activity panel tabs by default and track #6566
 
 1. Open your browser console and enter `localStorage.setItem( 'debug', 'wc-admin:tracks' );`.  Make sure the "Verbose" is selected under the levels shown.
@@ -75,6 +96,7 @@ Testing `woocommerce_navigation_intro_modal_dismissed`
 2. Shorten your viewport height so that the secondary menu overlaps the main.
 3. Make sure the menu title can still be seen.
 
+<<<<<<< HEAD
 ### Add filter to profile wizard steps #6564
 
 1. Add the following JS to your admin head.  You can use a plugin like "Add Admin Javascript" to do this:
@@ -155,6 +177,8 @@ UPDATE `wp_options` SET `option_value`=UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7
 5. Run `wc_admin_daily` job
 6. Navigate to WooCommerce -> Home and confirm the Insight note.
 
+=======
+>>>>>>> af9ba3f51 (Add testing instructions and changelog)
 ### Use wc filter to get status tabs for tools category #6525
 
 1. Register a new tab via the filter.
