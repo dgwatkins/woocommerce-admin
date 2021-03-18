@@ -96,7 +96,6 @@ Testing `woocommerce_navigation_intro_modal_dismissed`
 2. Shorten your viewport height so that the secondary menu overlaps the main.
 3. Make sure the menu title can still be seen.
 
-<<<<<<< HEAD
 ### Add filter to profile wizard steps #6564
 
 1. Add the following JS to your admin head.  You can use a plugin like "Add Admin Javascript" to do this:
@@ -177,8 +176,6 @@ UPDATE `wp_options` SET `option_value`=UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7
 5. Run `wc_admin_daily` job
 6. Navigate to WooCommerce -> Home and confirm the Insight note.
 
-=======
->>>>>>> af9ba3f51 (Add testing instructions and changelog)
 ### Use wc filter to get status tabs for tools category #6525
 
 1. Register a new tab via the filter.
