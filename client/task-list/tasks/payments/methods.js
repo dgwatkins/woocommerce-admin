@@ -5,6 +5,7 @@ import { __ } from '@wordpress/i18n';
 import interpolateComponents from 'interpolate-components';
 import {
 	getAdminLink,
+	getSetting,
 	WC_ASSET_URL as wcAssetUrl,
 } from '@woocommerce/wc-admin-settings';
 import { Link } from '@woocommerce/components';
@@ -35,6 +36,8 @@ import EWay from './eway';
 import Razorpay from './razorpay';
 import { Mollie } from './mollie';
 import { PayUIndia } from './payu-india';
+
+const wcAdminAssetUrl = getSetting( 'wcAdminAssetUrl', '' );
 
 export function getPaymentMethods( {
 	activePlugins,
@@ -111,7 +114,10 @@ export function getPaymentMethods( {
 				</>
 			),
 			before: (
-				<img src={ wcAssetUrl + 'images/mercadopago.png' } alt="" />
+				<img
+					src={ wcAdminAssetUrl + 'onboarding/mercadopago.png' }
+					alt=""
+				/>
 			),
 			visible: [ 'AR', 'BR', 'CL', 'CO', 'MX', 'PE', 'UY' ].includes(
 				countryCode
